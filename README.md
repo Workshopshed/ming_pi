@@ -11,10 +11,9 @@ MING is a containerised IoT sensor server stack in the traditions of LAMP. This 
 - NodeRed listening on port 1880 to provide an easy to use graphical environment for parsing,
   analysing, storing, and forwarding sensor data messages
 
-  We've also installed the NodeRed InfluxDB nodes by default so you easily store and retrieve
-  data locally.
+  The NodeRed InfluxDB nodes are installed by default so you easily store and retrieve data locally.
 
-- Grafana listening on port 80 providing a data visualisation environment for sensor data.
+- Grafana listening on port 3000 providing a data visualisation environment for sensor data.
 
 Each of these applications is built and runs in its own container within Docker
 
@@ -28,10 +27,43 @@ Currently tested targets are
 
 You'll need a Pi and to instal Docker and Docker Compose.
 
+Clone the repo with
+
+`git clone https://github.com/Workshopshed/ming_pi.git`
+
+Build the containers with:
+
+`docker-compose build`
+
+This could take a while on the first run as it has many images to download.
+Now run the containers with
+
+`docker-compose up`
+
+Again, on the first run this may take a while as the initial settings are configured and the database installed.
+
+# Connect to the applications
+
+If you Pi hostname is "homedashboard" then you can connect to it using
+
+## Node Red
+http://homedashboard.local:1880/
+
+## Grafana
+http://homedashboard.local:3000/
+
+## Influx DB
+http://homedashboard.local:8086/
+
+# Connecting the applications together
+
+It should be possible to do some of this config work up front but not got it working yet.
+The default datasources.yaml provided by the Balena.io does not seem to match the naming of the docker containers created which are ming_pi_influxdb_1 etc.
+
 # Volumes
 
 So that we don't destroy our SDCard, this project uses an external disk attached to the Pi.
-The docker containers are configured to use this disk.
+The docker containers should be configured to use this disk.
 
 # Attribution
 

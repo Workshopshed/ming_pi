@@ -1,1 +1,1 @@
-FROM --platform=linux/arm influxdb:latest
+FROM influxdb:latest
