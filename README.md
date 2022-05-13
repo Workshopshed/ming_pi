@@ -1,3 +1,5 @@
+# WORK IN PROGRESS
+
 # MING (Mosquitto, InfluxDB, NodeRed, Grafana)
 
 MING is a containerised IoT sensor server stack in the traditions of LAMP. This version is specific to Raspberry Pi.
@@ -24,11 +26,12 @@ Currently tested targets are
 
 # Getting going
 
-You'll need a Pi and to installer Docker and Docker Compose.
+You'll need a Pi and to instal Docker and Docker Compose.
 
+# Volumes
 
-
-
+So that we don't destroy our SDCard, this project uses an external disk attached to the Pi.
+The docker containers are configured to use this disk.
 
 # Attribution
 
