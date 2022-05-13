@@ -6,7 +6,7 @@ datasources:
     access: proxy
     database: ming_default
     user: admin
-    url: http://influxdb:8086
+    url: http://db:8086
     jsonData:
       timeInterval: "15s"
     secureJsonData:

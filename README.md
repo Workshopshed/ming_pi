@@ -57,8 +57,8 @@ http://homedashboard.local:8086/
 
 # Connecting the applications together
 
-It should be possible to do some of this config work up front but not got it working yet.
-The default datasources.yaml provided by the Balena.io does not seem to match the naming of the docker containers created which are ming_pi_influxdb_1 etc.
+When connecting between the applications from say Grafana to Influx you can refer to the server name as "db" e.g.
+http://db:8086
 
 # Volumes
 

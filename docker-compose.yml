@@ -11,6 +11,9 @@ services:
       - 'nodered-data:/data'
     ports:
       - "1880:1880"
+    links:
+      - 'influxdb:db'
+      - 'mosquitto:mq'
   influxdb:
     restart: always
     build: ./influxdb
@@ -32,6 +35,8 @@ services:
       - 'grafana-data:/var/lib/grafana'
     depends_on:
       - influxdb
+    links:
+      - 'influxdb:db'
   mosquitto:
     restart: always
     build: ./mosquitto
