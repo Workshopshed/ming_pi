@@ -1,6 +1,4 @@
-FROM nodered/node-red:1.0.2
+FROM --platform=linux/arm nodered/node-red:latest
 
 RUN npm install node-red-contrib-influxdb \
-                node-red-node-serialport \
                 node-red-dashboard
-

@@ -1,11 +1,8 @@
-version: '2'
+version: '3'
 volumes:
     influxdb-data:
     nodered-data:
     grafana-data:
-    jupyterlab-data:
-    homeassistant-data:
-    rhasspy-data:
 services:
   nodered:
     restart: always
@@ -41,41 +38,3 @@ services:
     ports:
       - "1883:1883"
       - "1884:1884"
-  jupyterlab:
-    restart: always
-    build: ./jupyterlab
-    ports:
-      - "8888:8888"
-    volumes:
-      - 'jupyterlab-data:/data'
-#  homeassistant:
-#    restart: always
-#    build: ./homeassistant
-#    ports:
-#      - "8123:8123" 
-#    volumes:
-#      - 'homeassistant-data:/config'
-#  rhasspy:
-#    restart: always
-#    build: ./rhasspy
-#    ports:
-#      - "12101:12101"
-#    volumes:
-#      - 'rhasspy-data:/profiles'
-#    devices:
-#      - "/dev/snd:/dev/snd"
-#    command: --user-profiles /profiles --profile en
-#  ap:
-#    build: ./ap
-#    restart: always
-#    network_mode: host
-#    privileged: true
-#    labels:
-#      io.balena.features.dbus: '1'
-#      io.balena.features.firmware: '1'
-#  bridge:
-#    restart: always
-#    build: ./bridge
-#    depends_on:
-#     - influxdb
-#     - mosquitto
