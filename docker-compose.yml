@@ -40,6 +40,8 @@ services:
   mosquitto:
     restart: always
     build: ./mosquitto
+    volumes:
+      - 'mosquitto-data:/etc/mosquitto'    
     ports:
       - "1883:1883"
       - "1884:1884"
