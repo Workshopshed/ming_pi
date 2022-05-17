@@ -13,8 +13,7 @@ RUN openssl genrsa -out server.key 2048
 RUN openssl req -new -out server.csr -key server.key -subj "/C=GB/ST=London/L=London/O=Global Security/OU=IT Department/CN=example.com"
 RUN openssl x509 -req -in server.csr -passin file:passphrase.txt -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 360 
 
-# FROM --platform=linux/arm eclipse-mosquitto:latest
-FROM eclipse-mosquitto:latest
+FROM --platform=linux/arm eclipse-mosquitto:latest
 
 # Add websocket support (alongside existing MQtt socket support)
 RUN echo 'listener 1883' >> /mosquitto/config/mosquitto.conf
