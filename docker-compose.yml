@@ -3,6 +3,7 @@ volumes:
     influxdb-data:
     nodered-data:
     grafana-data:
+    mosquitto-data:
 services:
   nodered:
     restart: always
