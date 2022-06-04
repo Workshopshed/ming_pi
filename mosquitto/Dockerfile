@@ -36,3 +36,13 @@ RUN echo '# Key Configuration' >> /mosquitto/config/mosquitto.conf
 RUN echo 'capath /etc/mosquitto/ca_certificates/ca.crt' >> /mosquitto/config/mosquitto.conf
 RUN echo 'keyfile /etc/mosquitto/certs/server.key' >> /mosquitto/config/mosquitto.conf
 RUN echo 'certfile /etc/mosquitto/certs/server.crt' >> /mosquitto/config/mosquitto.conf
+
+# Create user and password for nodes
+RUN echo date +%s | sha256sum | base64 | head -c 32; echo | mkpasswd > /etc/mosquitto/sensorpass.txt
+RUN (echo 'sensor:' ; cat sensorpass) > /etc/mosquitto/passwordfile
+RUN mosquitto_passwd -U /etc/mosquitto/passwordfile
+
+RUN echo '# Password Configuration' >> /mosquitto/config/mosquitto.conf
+RUN echo 'per_listener_settings true' >> /mosquitto/config/mosquitto.conf
+RUN echo 'allow_anonymous false' >> /mosquitto/config/mosquitto.conf
+RUN echo 'password_file /etc/mosquitto/passwordfile' >> /mosquitto/config/mosquitto.conf
