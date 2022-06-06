@@ -21,7 +21,7 @@ Each of these applications is built and runs in its own container within Docker
 
 Currently tested targets are
 
-- Raspberry Pi 4
+- Raspberry Pi 4 64bit
 
 # Getting going
 
