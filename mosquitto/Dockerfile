@@ -44,6 +44,7 @@ RUN echo 'certfile /etc/mosquitto/certs/server.crt' >> /mosquitto/config/mosquit
 
 # Add password file
 COPY --from=builder /tmp/passwordfile /etc/mosquitto/
+COPY --from=builder /tmp/sensorpass.txt /etc/mosquitto/
 
 RUN echo '# Password Configuration' >> /mosquitto/config/mosquitto.conf
 RUN echo 'per_listener_settings true' >> /mosquitto/config/mosquitto.conf
