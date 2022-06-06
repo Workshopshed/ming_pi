@@ -13,6 +13,11 @@ RUN openssl genrsa -out server.key 2048
 RUN openssl req -new -out server.csr -key server.key -subj "/C=GB/ST=London/L=London/O=Global Security/OU=IT Department/CN=example.com"
 RUN openssl x509 -req -in server.csr -passin file:passphrase.txt -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 360 
 
+# Create user and password for nodes
+RUN echo date +%s | sha256sum | base64 | head -c 32; echo | mkpasswd > sensorpass.txt
+RUN (echo 'sensor:' ; cat sensorpass.txt) > passwordfile
+RUN mosquitto_passwd -U passwordfile
+
 FROM --platform=linux/arm64 eclipse-mosquitto:latest
 
 # Add websocket support (alongside existing MQtt socket support)
@@ -37,10 +42,8 @@ RUN echo 'capath /etc/mosquitto/ca_certificates/ca.crt' >> /mosquitto/config/mos
 RUN echo 'keyfile /etc/mosquitto/certs/server.key' >> /mosquitto/config/mosquitto.conf
 RUN echo 'certfile /etc/mosquitto/certs/server.crt' >> /mosquitto/config/mosquitto.conf
 
-# Create user and password for nodes
-RUN echo date +%s | sha256sum | base64 | head -c 32; echo | mkpasswd > /etc/mosquitto/sensorpass.txt
-RUN (echo 'sensor:' ; cat sensorpass.txt) > /etc/mosquitto/passwordfile
-RUN mosquitto_passwd -U /etc/mosquitto/passwordfile
+# Add password file
+COPY --from=builder /tmp/passwordfile /etc/mosquitto/
 
 RUN echo '# Password Configuration' >> /mosquitto/config/mosquitto.conf
 RUN echo 'per_listener_settings true' >> /mosquitto/config/mosquitto.conf
