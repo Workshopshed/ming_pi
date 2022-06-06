@@ -1,4 +1,4 @@
-FROM --platform=linux/arm64 eclipse-mosquitto:latest AS builder
+FROM --platform=linux/arm64v8 eclipse-mosquitto:latest AS builder
 WORKDIR /tmp/
 
 #Create Random Passphrase
@@ -19,7 +19,7 @@ RUN echo date +%s | sha256sum | base64 | head -c 32; echo > sensorpass.txt
 RUN (echo -n 'sensor:' ; cat sensorpass.txt) > passwordfile
 RUN mosquitto_passwd -U passwordfile
 
-FROM --platform=linux/arm64 eclipse-mosquitto:latest
+FROM --platform=linux/arm64v8 eclipse-mosquitto:latest
 
 # Add websocket support (alongside existing MQtt socket support)
 RUN echo 'listener 1883' >> /mosquitto/config/mosquitto.conf
