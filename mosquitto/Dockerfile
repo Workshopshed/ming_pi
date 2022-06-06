@@ -2,6 +2,7 @@ FROM --platform=linux/arm64 eclipse-mosquitto:latest AS builder
 WORKDIR /tmp/
 
 #Create Random Passphrase
+RUN apk add mkpasswd
 RUN echo date +%s | sha256sum | base64 | head -c 32; echo | mkpasswd > passphrase.txt
 
 # Generate new keys
