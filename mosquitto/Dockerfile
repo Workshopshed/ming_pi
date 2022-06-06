@@ -2,8 +2,7 @@ FROM --platform=linux/arm64 eclipse-mosquitto:latest AS builder
 WORKDIR /tmp/
 
 #Create Random Passphrase
-RUN apk add mkpasswd
-RUN echo date +%s | sha256sum | base64 | head -c 32; echo | mkpasswd > passphrase.txt
+RUN echo date +%s | sha256sum | base64 | head -c 32; echo > passphrase.txt
 
 # Generate new keys
 # From https://community.element14.com/products/roadtest/b/blog/posts/harting-mica-alpine-linux-and-another-mqtt-container-with-certificate-and-tls-ssl#
@@ -15,7 +14,7 @@ RUN openssl req -new -out server.csr -key server.key -subj "/C=GB/ST=London/L=Lo
 RUN openssl x509 -req -in server.csr -passin file:passphrase.txt -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 360 
 
 # Create user and password for nodes
-RUN echo date +%s | sha256sum | base64 | head -c 32; echo | mkpasswd > sensorpass.txt
+RUN echo date +%s | sha256sum | base64 | head -c 32; echo > sensorpass.txt
 RUN (echo -n 'sensor:' ; cat sensorpass.txt) > passwordfile
 RUN mosquitto_passwd -U passwordfile
 
