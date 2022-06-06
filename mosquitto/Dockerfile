@@ -15,7 +15,7 @@ RUN openssl x509 -req -in server.csr -passin file:passphrase.txt -CA ca.crt -CAk
 
 # Create user and password for nodes
 RUN echo date +%s | sha256sum | base64 | head -c 32; echo | mkpasswd > sensorpass.txt
-RUN (echo 'sensor:' ; cat sensorpass.txt) > passwordfile
+RUN (echo -n 'sensor:' ; cat sensorpass.txt) > passwordfile
 RUN mosquitto_passwd -U passwordfile
 
 FROM --platform=linux/arm64 eclipse-mosquitto:latest
