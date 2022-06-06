@@ -9,6 +9,7 @@ RUN echo 'protocol websockets' >> /mosquitto/config/mosquitto.conf
 RUN echo 'user mosquitto' >> /mosquitto/config/mosquitto.conf
 
 # Add password file with a user called sensor 
+RUN mkdir /etc/mosquitto/
 RUN echo 'sensor:changeme'> /etc/mosquitto/passwd
 RUN mosquitto_passwd -U /etc/mosquitto/passwd
 
