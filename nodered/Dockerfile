@@ -1,4 +1,4 @@
-FROM --platform=linux/arm nodered/node-red:latest
+FROM --platform=linux/arm64 nodered/node-red:latest
 
 RUN npm install node-red-contrib-influxdb \
                 node-red-dashboard
