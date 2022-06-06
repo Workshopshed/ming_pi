@@ -2,7 +2,8 @@ FROM --platform=linux/arm64 eclipse-mosquitto:latest AS builder
 WORKDIR /tmp/
 
 #Create Random Passphrase
-RUN echo date +%s | sha256sum | base64 | head -c 32; echo > passphrase.txt
+RUN apk add --upgrade mkpasswd
+RUN echo date +%s | sha256sum | base64 | head -c 32; echo | mkpasswd > passphrase.txt
 
 # Generate new keys
 # From https://community.element14.com/products/roadtest/b/blog/posts/harting-mica-alpine-linux-and-another-mqtt-container-with-certificate-and-tls-ssl#
