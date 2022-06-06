@@ -39,7 +39,7 @@ RUN echo 'certfile /etc/mosquitto/certs/server.crt' >> /mosquitto/config/mosquit
 
 # Create user and password for nodes
 RUN echo date +%s | sha256sum | base64 | head -c 32; echo | mkpasswd > /etc/mosquitto/sensorpass.txt
-RUN (echo 'sensor:' ; cat sensorpass) > /etc/mosquitto/passwordfile
+RUN (echo 'sensor:' ; cat sensorpass.txt) > /etc/mosquitto/passwordfile
 RUN mosquitto_passwd -U /etc/mosquitto/passwordfile
 
 RUN echo '# Password Configuration' >> /mosquitto/config/mosquitto.conf
