@@ -1,4 +1,4 @@
-FROM --platform=linux/arm eclipse-mosquitto:latest
+FROM --platform=linux/arm64 eclipse-mosquitto:latest
 WORKDIR /tmp/
 
 #Create Random Passphrase
