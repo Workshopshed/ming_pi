@@ -68,11 +68,11 @@ Start the containers with
 
 From a separate console connect to the Mosquitto container with
 
-'docker exec -it  ming_pi_mosquitto_1 sh'
+`docker exec -it  ming_pi_mosquitto_1 sh`
 
 Once in use the mosquitto_passwd command to set the passwords https://mosquitto.org/man/mosquitto_passwd-1.html
 
-'mosquitto_passwd /etc/mosquitto/passwd sensor'
+`mosquitto_passwd /etc/mosquitto/passwd sensor`
 
 Then exit the shell. And restart the containers with
 
