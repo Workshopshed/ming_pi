@@ -15,8 +15,5 @@ RUN mosquitto_passwd -U /etc/mosquitto/passwd
 
 RUN echo '# Password Configuration' >> /mosquitto/config/mosquitto.conf
 RUN echo 'per_listener_settings true' >> /mosquitto/config/mosquitto.conf
-RUN echo 'allow_anonymous false' >> /mosquitto/config/mosquitto.conf
 RUN echo 'password_file /etc/mosquitto/passwd' >> /mosquitto/config/mosquitto.conf
 
-#Copy passwords to volume
-VOLUME [/etc/mosquitto]
