@@ -59,8 +59,32 @@ http://homedashboard.local:8086/
 
 When connecting between the applications from say Grafana to Influx you can refer to the server name as "db" e.g.
 http://db:8086
+mqtt://mq:1882
+
+# Setting Mosquitto Passwords
+
+Start the containers with 
+
+`docker-compose up`
+
+From a separate console connect to the Mosquitto container with
+
+'docker exec -it  ming_pi_mosquitto_1 sh'
+
+Once in use the mosquitto_passwd command to set the passwords https://mosquitto.org/man/mosquitto_passwd-1.html
+
+'mosquitto_passwd /etc/mosquitto/passwd sensor'
+
+Then exit the shell. And restart the containers with
+
+`docker-compose down`
+`docker-compose up`
+
+Note that if you change the password in Node-Red there may continue to be errors in the logs until you complete another down/up recycling.
 
 # Volumes
+
+TODO:
 
 So that we don't destroy our SDCard, this project uses an external disk attached to the Pi.
 The docker containers should be configured to use this disk.
