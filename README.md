@@ -58,8 +58,7 @@ http://homedashboard.local:8086/
 # Connecting the applications together
 
 When connecting between the applications from say Grafana to Influx you can refer to the server name as "db" e.g.
-http://db:8086
-mqtt://mq:1882
+http://db:8086 or mqtt://mq:1883 
 
 # Setting Mosquitto Passwords
 
