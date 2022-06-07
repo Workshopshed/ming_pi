@@ -62,6 +62,8 @@ http://db:8086 or mqtt://mq:1883
 
 # Setting Mosquitto Passwords
 
+The containers create a user "sensor" with the password "changeme" you can change this with the following process.
+
 Start the containers with 
 
 `docker-compose up`
