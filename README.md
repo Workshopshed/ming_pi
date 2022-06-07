@@ -23,6 +23,8 @@ Currently tested targets are
 
 - Raspberry Pi 4 64bit
 
+Note that the platform specific options are at the top of each Dockerfile e.g. --platform=linux/arm64v8
+
 # Getting going
 
 You'll need a Pi and to instal Docker and Docker Compose.
