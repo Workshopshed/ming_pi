@@ -76,8 +76,7 @@ Once in use the mosquitto_passwd command to set the passwords https://mosquitto.
 
 Then exit the shell. And restart the containers with
 
-`docker-compose down`
-`docker-compose up`
+`docker-compose down; docker-compose up`
 
 Note that if you change the password in Node-Red there may continue to be errors in the logs until you complete another down/up recycling.
 
