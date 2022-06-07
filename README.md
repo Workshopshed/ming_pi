@@ -44,7 +44,7 @@ Again, on the first run this may take a while as the initial settings are config
 
 # Connect to the applications
 
-If you Pi hostname is "homedashboard" then you can connect to it using
+If your Pi hostname is "homedashboard" then you can connect to it using
 
 ## Node Red
 http://homedashboard.local:1880/
