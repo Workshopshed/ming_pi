@@ -1,10 +1,35 @@
-version: '3'
+version: '4'
+volumes:
+    influxdb-data:
+        driver: local
+        driver_opts:
+            type: none
+            device: ${DATADIR}
+            o: bind
+    nodered-data:
+        driver: local
+        driver_opts:
+            type: none
+            device: ${DATADIR}
+            o: bind    
+    grafana-data:
+        driver: local
+        driver_opts:
+            type: none
+            device: ${DATADIR}
+            o: bind    
+    mosquitto-data:
+        driver: local
+        driver_opts:
+            type: none
+            device: ${DATADIR}
+            o: bind    
 services:
   nodered:
     restart: always
     build: ./nodered
     volumes:
-      - '${DATADIR}/nodered-data:/data'
+      - 'nodered-data:/data'
     ports:
       - "1880:1880"
     links:
@@ -16,7 +41,7 @@ services:
     environment:
       - INFLUXDB_DB=ming_default
     volumes:
-      - '${DATADIR}/influxdb-data:/var/lib/influxdb2'
+      - 'influxdb-data:/var/lib/influxdb2'
     ports:
       - "8086:8086"
   grafana:
@@ -28,7 +53,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - '${DATADIR}/grafana-data:/var/lib/grafana'
+      - 'grafana-data:/var/lib/grafana'
     depends_on:
       - influxdb
     links:
@@ -37,7 +62,7 @@ services:
     restart: always
     build: ./mosquitto
     volumes:
-      - '${DATADIR}/mosquitto-data:/etc/mosquitto'    
+      - 'mosquitto-data:/etc/mosquitto'    
     ports:
       - "1883:1883"
       - "1884:1884"
