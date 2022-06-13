@@ -86,10 +86,10 @@ Note that if you change the password in Node-Red there may continue to be errors
 
 # Volumes
 
-TODO:
-
 So that we don't destroy our SDCard, this project uses an external disk attached to the Pi.
-The docker containers should be configured to use this disk.
+
+The docker-compose file is configured with a datadir environment variable which is in turn defined in the .env file.
+The default location is /media/datadrive which is where you'd mount your external drive.
 
 # Attribution
 
