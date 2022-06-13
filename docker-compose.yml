@@ -9,7 +9,7 @@ services:
     restart: always
     build: ./nodered
     volumes:
-      - 'nodered-data:/data'
+      - '${DATADIR}/nodered-data:/data'
     ports:
       - "1880:1880"
     links:
@@ -21,7 +21,7 @@ services:
     environment:
       - INFLUXDB_DB=ming_default
     volumes:
-      - 'influxdb-data:/var/lib/influxdb2'
+      - '${DATADIR}/influxdb-data:/var/lib/influxdb2'
     ports:
       - "8086:8086"
   grafana:
@@ -33,7 +33,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - 'grafana-data:/var/lib/grafana'
+      - '${DATADIR}/grafana-data:/var/lib/grafana'
     depends_on:
       - influxdb
     links:
@@ -42,7 +42,7 @@ services:
     restart: always
     build: ./mosquitto
     volumes:
-      - 'mosquitto-data:/etc/mosquitto'    
+      - '${DATADIR}/mosquitto-data:/etc/mosquitto'    
     ports:
       - "1883:1883"
       - "1884:1884"
