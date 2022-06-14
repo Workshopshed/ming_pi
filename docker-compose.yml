@@ -4,25 +4,25 @@ volumes:
         driver: local
         driver_opts:
             type: none
-            device: ${DATADIR}
+            device: ${DATADIR}/influxdb-data
             o: bind
     nodered-data:
         driver: local
         driver_opts:
             type: none
-            device: ${DATADIR}
+            device: ${DATADIR}/nodered-data
             o: bind    
     grafana-data:
         driver: local
         driver_opts:
             type: none
-            device: ${DATADIR}
+            device: ${DATADIR}/grafana-data
             o: bind    
     mosquitto-data:
         driver: local
         driver_opts:
             type: none
-            device: ${DATADIR}
+            device: ${DATADIR}/mosquitto-data
             o: bind    
 services:
   nodered:
