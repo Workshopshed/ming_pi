@@ -91,6 +91,18 @@ So that we don't destroy our SDCard, this project uses an external disk attached
 The docker-compose file is configured with a datadir environment variable which is in turn defined in the .env file.
 The default location is /media/datadrive which is where you'd mount your external drive.
 
+## Rootless Docker
+
+If you are running rootless mode docker https://docs.docker.com/engine/security/rootless/ then you will need to ensure that the permissions are configured on your external drive to allow the remapped userids to modify their own files. This can be done by granting permission to the root of the data drive and then creating the folders for each of the containers to store their data.
+
+```
+chmod 777 /media/datadrive/
+mkdir /media/datadrive/mosquitto-data
+mkdir /media/datadrive/influxdb-data
+mkdir /media/datadrive/nodered-data
+mkdir /media/datadrive/grafana-data
+```
+
 # Attribution
 
 - This is in part based the work done by the Balena.io team
