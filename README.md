@@ -27,7 +27,7 @@ Note that the platform specific options are at the top of each Dockerfile e.g. -
 
 # Getting going
 
-You'll need a Pi and to instal Docker and Docker Compose.
+You'll need a Pi and to install Docker and Docker Compose.
 
 Clone the repo with
 
