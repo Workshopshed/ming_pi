@@ -1,4 +1,4 @@
-FROM --platform=linux/arm64v8 eclipse-mosquitto:latest
+FROM --platform=linux/arm64 eclipse-mosquitto:latest
 
 # Add websocket support (alongside existing MQtt socket support)
 RUN echo 'listener 1883' >> /mosquitto/config/mosquitto.conf
