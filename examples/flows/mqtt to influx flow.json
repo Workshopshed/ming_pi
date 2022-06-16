@@ -1,0 +1,346 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "1a4659900c544975",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Sensor/test",
+        "payload": "{\"T\":\"22\",\"H\":\"50\"}",
+        "payloadType": "json",
+        "x": 200,
+        "y": 220,
+        "wires": [
+            [
+                "5575ee697912a680"
+            ]
+        ]
+    },
+    {
+        "id": "3d40a0c13f53db5f",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1190,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "eaa5feee70642324",
+        "type": "influxdb out",
+        "z": "f6f2187d.f17ca8",
+        "influxdb": "7575e2944f1c87c0",
+        "name": "",
+        "measurement": "",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "Workshopshed",
+        "bucket": "sensors",
+        "x": 1180,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "fc2b659bb7076421",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "Sensor/#",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "909869f3886e8c12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 300,
+        "wires": [
+            [
+                "2c272c9e9594d97a"
+            ]
+        ]
+    },
+    {
+        "id": "2c272c9e9594d97a",
+        "type": "change",
+        "z": "f6f2187d.f17ca8",
+        "name": "Add Timestamp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "timestamp",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 300,
+        "wires": [
+            [
+                "e2b68e4945edee9e"
+            ]
+        ]
+    },
+    {
+        "id": "72a36382f19c6fd7",
+        "type": "change",
+        "z": "f6f2187d.f17ca8",
+        "name": "Temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.T",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "measurement",
+                "pt": "msg",
+                "to": "temperature",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 730,
+        "y": 240,
+        "wires": [
+            [
+                "d2c1c2963250a392"
+            ]
+        ]
+    },
+    {
+        "id": "a96dafb1c8081163",
+        "type": "change",
+        "z": "f6f2187d.f17ca8",
+        "name": "Humidity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.H",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "measurement",
+                "pt": "msg",
+                "to": "humidity",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 720,
+        "y": 300,
+        "wires": [
+            [
+                "d2c1c2963250a392"
+            ]
+        ]
+    },
+    {
+        "id": "d2c1c2963250a392",
+        "type": "template",
+        "z": "f6f2187d.f17ca8",
+        "name": "Convert to DB",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "[{     \"value\": {{payload}},\n        \"time\": \"{{timestamp}}\" },\n {     \"tag1\": \"{{topic}}\" }]\n ",
+        "output": "json",
+        "x": 960,
+        "y": 280,
+        "wires": [
+            [
+                "eaa5feee70642324",
+                "3d40a0c13f53db5f"
+            ]
+        ]
+    },
+    {
+        "id": "acd80aa43b25c9ce",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 310,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "444a2c324b4cb9bd",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "Connect",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "909869f3886e8c12",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 400,
+        "wires": [
+            [
+                "acd80aa43b25c9ce"
+            ]
+        ]
+    },
+    {
+        "id": "5575ee697912a680",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "909869f3886e8c12",
+        "x": 450,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "e2b68e4945edee9e",
+        "type": "change",
+        "z": "f6f2187d.f17ca8",
+        "name": "Trim Topic",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "$substringAfter(topic,\"/\")\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 300,
+        "wires": [
+            [
+                "72a36382f19c6fd7",
+                "a96dafb1c8081163"
+            ]
+        ]
+    },
+    {
+        "id": "7575e2944f1c87c0",
+        "type": "influxdb",
+        "hostname": "db",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "",
+        "usetls": false,
+        "tls": "d50d0c9f.31e858",
+        "influxdbVersion": "2.0",
+        "url": "http://db:8086",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "909869f3886e8c12",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mq",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d50d0c9f.31e858",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": false
+    }
+]
