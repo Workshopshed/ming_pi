@@ -2,7 +2,7 @@
     {
         "id": "f6f2187d.f17ca8",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "Process Sensor Data",
         "disabled": false,
         "info": ""
     },
@@ -195,7 +195,7 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "[{     \"value\": {{payload}},\n        \"time\": \"{{timestamp}}\" },\n {     \"tag1\": \"{{topic}}\" }]\n ",
+        "template": "[{     \"value\": {{payload}},\n        \"time\": \"{{timestamp}}\" },\n {     \"location\": \"{{topic}}\" }]\n ",
         "output": "json",
         "x": 960,
         "y": 280,
