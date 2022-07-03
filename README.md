@@ -1,5 +1,3 @@
-# WORK IN PROGRESS
-
 # MING (Mosquitto, InfluxDB, NodeRed, Grafana)
 
 MING is a containerised IoT sensor server stack in the traditions of LAMP. This version is specific to Raspberry Pi.
