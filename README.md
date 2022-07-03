@@ -115,4 +115,4 @@ and
 
 # Contributing
 
-??
+Not sure if I'll be actively maintaining this project but feel free to clone it and ask questions.
